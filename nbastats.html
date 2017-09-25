@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nba Stats</title>
+	</head>
+	<body>
+		<h1>Nba Teams Ranked by Specific Stats</h1>
+		<h3>Please choose a value to sort your table by</h3>
+		<select id = "mySelect" onchange = "tableMaker(this.value)">
+			<option value = "">Choose a Stat:</option>
+			<option value = "fullSet">Full Data Set</option>
+			<option value = "wins">Wins (Most First)</option>
+			<option value = "loss">Losses (Most First)</option>
+			<option value = "ppg">Points Per Game (Highest First)</option>
+		</select>
+		<div id = "output"></div>
+	</body>
+	<script src = "nbastats.js"></script>
+	<script>
+		function tableMaker(value){
+			var dataSet = "";
+			var dataParse = "";
+			var output = "";
+			
+			
+				if (value == "wins"){
+				output = "<table border = '1'>" + "<tr>" + "<th> Rank </th>" +  "<th> Team Name </th>" + "<th> Wins </th>"+ "</tr>";
+			
+			/* Sorting Function	
+				function winSort(a, b){
+					if (a[1] === b[1]){
+						return 0
+					}else{
+						return (a[1] < b[1]) ? -1 : 1;
+				}
+				}
+				data.sort(winSort);
+				*/
+				for (var x = 0; x < data.length; x++){
+					var rank = x + 1;
+					var name = data[x].team;
+					var wins = data[x].win;
+					
+					output += "<tr>" + "<td>" + rank + "</td>" + "<td>" + name + "</td>" + "<td>" + wins + "</td>" + "</tr>";
+			}
+				output += "</table>";
+				console.log(output);
+				document.getElementById("output").innerHTML = output;
+			}else if (value == "loss"){
+				output = "<table border = '1'>" + "<tr>" + "<th> Rank </th>" +  "<th> Team Name </th>" + "<th> Losses </th>" +"</tr>";
+					for (var x = 0; x < data.length; x++){
+						var rank = x + 1;
+						var name = data[x].team;
+						var loss = data[x].loss;
+						
+						output += "<tr>" + "<td>" + rank + "</td>" +  "<td>" + name + "</td>" +"<td>" + loss + "</td>"+ "</tr>";
+					}
+					output += "</table>";
+					console.log(output);
+					document.getElementById("output").innerHTML = output;
+				}else if (value == "ppg"){
+					output = "<table border = '1'>" + "<tr>" + "<th> Rank </th>" +  "<th> Team Name </th>" +"<th> PPG </th>" + "</tr>";
+						for (var x = 0; x < data.length; x++){
+							var rank = x + 1;
+							var name = data[x].team;
+							var ppg = data[x].ppg;
+							
+							output += "<tr>" + "<td>" + rank + "</td>" +  "<td>" + name + "</td>" + "<td>" + ppg + "</td>" + "</tr>";
+						}
+						output += "</table>";
+						console.log(output);
+						document.getElementById("output").innerHTML = output;
+					}
+			
+			else{
+				output = "<table border = '1'>" + "<tr>" + "<th> Rank </th>" + "<th> Team Name </th>" + "<th> Wins </th>" + "<th> Losses </th>" + "<th> PPG </th>" + "</tr>";
+				
+				for (var x = 0; x < data.length; x++){
+					var rank = x + 1;
+					var name = data[x].team;
+					var wins = data[x].win;
+					var loss = data[x].loss;
+					var ppg = data[x].ppg;
+					
+					output += "<tr>" + "<td>" + rank + "</td>" +  "<td>" + name + "</td>" +  "<td>" + wins + "</td>" +  "<td>" + loss + "</td>" +  "<td>" + ppg + "</td>" + "</tr>";
+				}
+				output += "</table>";
+				console.log(output);
+				document.getElementById("output").innerHTML = output;
+			}
+			
+			
+			/*
+			Making Table Dynamic and Self-Sorting
+			dataSet = JSON.stringify(data);
+			xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function(){
+				if (this.readyState == 4 && this.status ==  200){
+					dataParse = JSON.parse(this.responseText);
+					output += "<table border = '1' >"
+					for (i in dataParse){
+						txt += "<tr><td>" + dataParse[i].name + "</td></tr>";
+					}
+					output += "</table>";
+					document.getElementById("demo").innerHTML = output;
+				}
+			};
+			xmlhttp.open("GET", "nbastats.js", true);
+			xmlhttp.send("x=" + dataSet);
+			
+			*/
+		}
+	</script>
+</html>
